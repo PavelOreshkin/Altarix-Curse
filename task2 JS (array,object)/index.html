@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Task2 JS</title>
+</head>
+
+<body>
+  <script>
+    
+    
+    // ЗАДАНИЕ 1
+    const calculator = (operand1, operator, operand2) => {
+      if (typeof (operand1) !== "number") throw { operand1: operand1 }
+      if (typeof (operand2) !== "number") throw { operand2: operand2 }
+      if (typeof (operand1) === "number" && typeof (operand2) === "number") {
+        switch (operator) {
+          case "+": return operand1 + operand2;
+          case "-": return operand1 - operand2;
+          case "*": return operand1 * operand2;
+          case "/": return operand1 / operand2;
+          default: throw { operator: operator }
+        }
+      }
+    }
+
+    try {
+      // проверка задания №1
+      // console.log(calculator(10, "+", 5));
+      // 15
+
+      // console.log(calculator('as', "+", 5));
+      // Первый операнд не является числом: "as"
+
+      // console.log(calculator(10, "&", 5));
+      // Неизвестный оператор: "&"
+    } catch (error) {
+      if (error.operand1) console.log(`Первый операнд не является числом: "${error.operand1}"`)
+      if (error.operand2) console.log(`Второй операнд не является числом: "${error.operand2}"`)
+      if (error.operator) console.log(`Неизвестный оператор: "${error.operator}"`)
+    }
+
+
+
+
+    // ЗАДАНИЕ 2
+    const search = (arr, searchElement) => {
+      let result = 0;
+      arr.forEach(item => {
+        if (item.indexOf(searchElement) !== -1) result++
+      })
+      return result
+    }
+    // проверка задания №2
+    // console.log(search(['Собака не кот', 'Я собака ты собака', 'Кит как кот но нет'],'кот'))
+    //2
+
+
+
+
+    // ЗАДАНИЕ 3
+    const formatNumber = (number) => {
+      const string = number.toFixed(2).toString();
+      const leftSide = [];
+      let rightSide = ''
+      let count = -1;
+      for (let i = string.indexOf('.') - 1; i >= 0; i--) {
+        count++
+        if (count === 3) {
+          leftSide.unshift(' ');
+          count = 0;
+        }
+        leftSide.unshift(string[i])
+      }
+      for (let i = string.indexOf('.') + 1; i < string.length; i++) {
+        rightSide = rightSide + string[i]
+      }
+      const result = `${leftSide.join('')},${rightSide}`;
+      return result
+    }
+    // проверка задания №3
+    // console.log(formatNumber(11222333.5432))
+    //"11 222 333,54"
+
+    // console.log(formatNumber(22333.0))
+    // "22 333,00"
+
+    // console.log(formatNumber(22333.05))
+    // "22 333,05"
+
+    // console.log(formatNumber(2233))
+    // "2 233,00"
+  </script>
+</body>
+
+</html>

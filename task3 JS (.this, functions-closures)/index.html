@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Task2 JS</title>
+</head>
+
+<body>
+  <script>
+
+
+
+    // ЗАДАНИЕ 1
+    // принимает функцию и контекст вызова, возвращает функцию, 
+    // которая всегда будет иметь корректный контекст вызова 
+    function bind(func, context) {
+      return function () {
+        func.call(context)
+      };
+    }
+    var user = {
+      firstName: "Вася",
+      sayHi: function () {
+        console.log(this.firstName);
+      }
+    }
+    // setTimeout(bind(user.sayHi, user), 1000)
+    // "Вася"
+    // контекст сохранился
+
+
+
+    // ЗАДАНИЕ 2
+    // не принимает аргументов, возвращает функцию, 
+    // которая возвращает результат parseInt, если вызвана с таким аргументом впервые, 
+    // иначе не вычисляет заново, а возвращает сохранённое значение
+    function parseIntWithCashe() {
+      let cash;
+      return function (string) {
+        if (cash === string) {
+          console.log('cash')
+          return cash
+        } else {
+          console.log('parseInt')
+          cash = string;
+          return parseInt(string);
+        }
+      }
+    }
+    var par = parseIntWithCashe()
+    // par('123')
+    //"parseInt"
+
+    // par('222')
+    //"parseInt"
+
+    // par('222')
+    //"cash"
+
+
+
+    // ЗАДАНИЕ 3
+    // принимает любое количество аргументов, 
+    // возвращает их сумму, без for
+    function getTotalSum() {
+      return argStr = [].join.call(arguments, ',').split(',').reduce((sum, current) => parseInt(sum) + parseInt(current))
+    }
+    // console.log(getTotalSum(4, 2, 3))
+    // 9
+
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>task7</title>
+</head>
+
+<body>
+  <div id='elem'> блок для задания3</div>
+  <br>
+  <br>
+  <br>
+  <p>кнопка для задания 5</p>
+  <button type="button" onclick="Mark.growingUp()"> увеличить возраст на 1год</button>
+
+  <script>
+    // 1) Дан объект {name: 'Петр', 'surname': 'Петров', 'age': '20 лет', }. Запишите соответствующие значения в переменные
+    // name, surname и age.Сделайте так, чтобы, если какое - то значение не задано - оно принимало следующее значение по
+    // умолчанию: {name: 'Аноном', 'surname': 'Анонимович', 'age': '? лет'}
+    let obj = {
+      name: 'Петр',
+      surname: 'Петров',
+      age: '20 лет'
+    }
+    let {
+      name = 'Аноном', surname = 'Анонимович', age = '? лет'
+    } = obj;
+    // проверить задание:
+    // console.log(name)
+
+    // 2) Дана строка. С помощью for-of подсчитайте количество букв 'о' в ней – строку передаём как параметр функции
+    const getWordO = (str) => {
+      const strArr = str.split('');
+      let count = 0;
+      for (let item of strArr) {
+        if (item === 'о') count++;
+      }
+      return count;
+    }
+    // проверить задание:
+    // console.log(getWordO('кококоо'))
+
+
+    // 3) Дан объект с настройками, например, 
+    // {id: 'elem', color: 'blue', border: '1px solid red', font: '15px Arial'}.
+    // Сделайте функцию, которая получает этот объект, 
+    // извлекает из него все настройки в соответствующие переменные и для
+    // элемента с указанным id(в нашем случае это 'elem') ставит заданные CSS свойства.
+    // В объекте могут быть только эти ключи, однако, какой - либо ключ(кроме id) 
+    // может быть не задан - в этом случае пусть возьмутся следующие значения по
+    // умолчанию: color: 'blue', border: '1px solid red', font: '15px Arial'. 
+
+    const styles = {
+      id: 'elem',
+      color: 'blue',
+      border: '1px solid red',
+      font: '15px Arial'
+    }
+
+    const createCss = (styles) => {
+      let {
+        id,
+        color = 'blue',
+        border = '1px solid red',
+        font = '15px Arial'
+      } = styles;
+      var elem = document.getElementById(id)
+      elem.setAttribute('style', `color: ${color}, border: ${border}, font:${font}`)
+      return elem
+    }
+    // проверить задание
+    // console.log(createCss(styles))
+
+    // 4) Дан массив с числами. Создать функцию, которая с помощью цикла и метода add добавит все элементы этого массива в
+    // коллекцию Set.Причем у функции будет два параметра– массив поэлементно(не объект массива, а все элементы передать в параметры),
+    //   option– отвечает за выбор чисел из массива.Должны быть доступны опции– четные числа, нечетные числа,
+    //   все подряд числа.
+
+    const arrNumber = [1, 2, 3, 4, 5];
+    // options: четные-even, нечетные-odd, все-all
+    const setFunc = (arr, options) => {
+      let set = new Set();
+      arr.forEach(item => {
+        switch (options) {
+          case 'even':
+            if (item % 2 === 0) set.add(item)
+            break;
+          case 'odd':
+            if (item % 2 !== 0) set.add(item)
+            break;
+          case 'all':
+            set.add(item)
+            break;
+          default:
+            set.add(item)
+            break;
+        }
+      })
+      return set
+    }
+    // проверка задания
+    // console.log(setFunc(arrNumber, 'odd'))
+
+    // 5) * Создать объект Человека с параметризуемым полом при инстанцировании объекта, возрастом, местом
+    // работы / учебы / родом занятия, классом - соответственно будут дети, школьники, студенты, взрослые, пенсионеры.
+    // У этих объектов должны быть методы:
+    //   a.метод увеличения возраста на 1
+    // b.смены учреждения(для детей– детский сад– обнуляется при достижении школьной стадии, дл студентов– вуз,
+    //   обнуляется при достижении 23 лет и т.д., у пенсионеров– ничего или ваша фантазия)
+    // c.человек должен иметь возможность перейти в новый класс при смене лет(например, при достижении 7 лет– школьник,
+    //   при достижении 17 лет– студент, при достижении 23– работник, 63 или 65(плак - плак)– от пола зависит -
+    //   пенсионер)
+    // d.Пол менять нельзя(это сеттеры и геттеры для свойств объекта Решается с помощью наследования и классов из es2015
+
+    class Human {
+      constructor(sex) {
+        this.sex = sex;
+        this.age = 0;
+        this.profession = 'nothing';
+      }
+
+      growingUp() {
+        this.age++
+        if (this.age >= 4) this.profession = 'kindergartener';
+        if (this.age >= 7) this.profession = 'schoolboy';
+        if (this.age >= 17) this.profession = 'student';
+        if (this.age >= 23) this.profession = 'working';
+        if (this.sex === 'male' && this.age >= 65) this.profession = 'retiree';
+        if (this.sex === 'female' && this.age >= 63) this.profession = 'retiree';
+
+        console.log(`Возраст: ${this.age}, Профессия: ${this.profession}, Пол: ${this.sex}`);
+      }
+    }
+    
+    let Mark = new Human('male')
+
+    startLive = (human) => {
+      let live = setInterval(() => {
+        human.growingUp()
+        if (Mark.age === 20) {
+          clearInterval(live);
+          console.log(`${human.profession} умер`)
+        }
+      }, 500);
+    }
+
+    startLive(Mark);
+  </script>
+</body>
+
+</html>

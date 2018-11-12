@@ -2,10 +2,11 @@ let calc = require('./calc')
 var nodePath = process.argv[0];
 var appPath = process.argv[1];
 var firstOperand = +process.argv[2];
-var secondOperand = +process.argv[3];
+var operator = process.argv[3];
+var secondOperand = +process.argv[4];
 
 try {
-  console.log(calc(firstOperand, "+", secondOperand))
+  console.log(calc(firstOperand, operator, secondOperand))
   // проверка задания
   // console.log(calc(10, "+", 5));
   // 15

@@ -1,0 +1,17 @@
+.calendar{
+  border-collapse: collapse;
+}
+th,
+td {
+  padding: 5px;
+  border: 1px solid black;  
+  text-align: center;
+  cursor: pointer;
+}
+th {
+  background-color: lightgray;
+  font-weight: 900;
+}
+.active {
+  background: lightgreen;  
+}

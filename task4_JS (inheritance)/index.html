@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>task4_js</title>
+</head>
+
+<body>
+  <script>
+    // ЗАДАНИЕ 1
+    // Конструктор сломанных часов:
+    function Clock() {
+      this.date = new Date();
+    }
+
+    Clock.prototype.start = function () {
+      // Первый вариант решениея
+      let _this = this
+      setInterval(
+        function () {
+          _this.date = new Date();
+        }, 1000);
+
+      // Второй вариант решениея
+      // setInterval(
+      //   function () {
+      //     this.date = new Date();
+      //   }.bind(this), 1000);
+    }
+
+    Clock.prototype.getTime = function () {
+      return this.date.toLocaleTimeString();
+    }
+
+    // Проверка работы
+    let myClock = new Clock();
+
+    myClock.start();
+    console.log(myClock.getTime());
+
+    setTimeout(function () {
+      console.log(myClock.getTime());
+    }, 2000);
+
+
+
+
+    // ЗАДАНИЕ 2
+    function Clock() {
+      this.date = new Date();
+    }
+
+    Clock.prototype.start = function () {
+      setInterval(
+        function () {
+          this.date = new Date();
+          if (this.date.toLocaleTimeString() == this.AlertTime.toLocaleTimeString()) {
+            alert('ALARM!!')
+          }
+        }.bind(this), 1000);
+    }
+
+    Clock.prototype.getTime = function () {
+      return this.date.toLocaleTimeString();
+    }
+
+    function AlarmClock() {
+      Clock.apply(this, arguments)
+      this.AlertTime = new Date(0);
+
+      this.setAlarmTime = function (time) {
+        const arrTime = time.split(':');
+        this.AlertTime.setHours(arrTime[0]);
+        this.AlertTime.setMinutes(arrTime[1]);
+        this.AlertTime.setSeconds(arrTime[2]);
+      }
+
+      this.getAlarmTime = function () {
+        return this.AlertTime.toLocaleTimeString()
+      }
+    }
+
+    AlarmClock.prototype = Object.create(Clock.prototype);
+    AlarmClock.prototype.constructor = AlarmClock;
+
+    // Проверка задания
+    const myAlarmClock = new AlarmClock();
+    myAlarmClock.setAlarmTime('22:18:45')
+    myAlarmClock.start();
+  </script>
+</body>
+
+</html>

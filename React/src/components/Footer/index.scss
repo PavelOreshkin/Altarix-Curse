@@ -1,0 +1,21 @@
+.Footer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  height: 150px;
+  border: 1px solid gray;
+
+  &__textarea {
+    max-height: 90%;
+    min-height: 90%;
+    max-width: calc( 100% - 120px);
+    min-width: calc( 100% - 120px);
+    font-size: 20px;
+  }
+  &__button {
+    height: 60px;
+    margin: 20px;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+}

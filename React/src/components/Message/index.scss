@@ -1,0 +1,41 @@
+.Message {
+  display: flex;
+  align-items: center;
+  height: 100px;
+
+  &_myself {
+    justify-content: flex-end;
+
+    & :first-child {
+      order: 1;
+    }
+  }
+
+  &__user {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+  }
+
+  &__text {
+    max-width: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    border: 3px solid gray;
+    border-radius: 15px;
+  }
+}
+
+.MessageUser {
+  &__icon {
+    height: 40px;
+  }
+
+  &__name {
+    padding-top: 10px;
+  }
+}

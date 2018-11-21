@@ -1,0 +1,21 @@
+@import '../helpers/variables.scss';
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: $body-fontFamily;
+  font-size: $body-fontSize;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  width: 900px;
+}

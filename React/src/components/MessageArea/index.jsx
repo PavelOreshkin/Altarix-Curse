@@ -1,18 +1,16 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './index.scss';
-import Message from '../Message';
+import { Message } from '../Message';
 
-class MessageArea extends React.Component {
-  render() {
-    const { messages } = this.props;
-    return (
-      <section className="MessageArea">
-        <ul>
-          {messages.map(item => <li><Message message={item} /></li>)}
-        </ul>
-      </section>
-    )
-  }
+export const MessageArea = ({ messages }) => (  
+  <section className="MessageArea">
+    <ul>
+      {messages.map(item => <li key={item.id}><Message messageObj={item} /></li>)}
+    </ul>
+  </section>
+)
+
+MessageArea.propTypes = {
+  // messageObj: PropTypes.objectOf() string.isRequired
 }
-
-export default MessageArea;

@@ -6,10 +6,9 @@
   border: 1px solid gray;
 
   &__textarea {
-    max-height: 90%;
-    min-height: 90%;
-    max-width: calc( 100% - 120px);
-    min-width: calc( 100% - 120px);
+    height: 90%;
+    width: calc( 100% - 120px);
+    resize: none;
     font-size: 20px;
   }
   &__button {

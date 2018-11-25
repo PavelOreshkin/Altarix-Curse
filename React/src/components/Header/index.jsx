@@ -1,13 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './index.scss';
 
-class Header extends React.Component {
-  render() {
-    const { userName } = this.props;
-    return (
-      <header className="Header">{userName}</header>
-    )
-  }
-}
+export const Header = ({ userName }) => <header className="Header">{userName}</header>;
 
-export default Header;
+Header.propTypes = {
+  userName: PropTypes.string.isRequired
+}

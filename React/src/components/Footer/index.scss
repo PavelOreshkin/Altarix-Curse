@@ -4,7 +4,6 @@
   align-items: center;
   height: 150px;
   border: 1px solid gray;
-
   &__textarea {
     height: 90%;
     width: calc( 100% - 120px);
@@ -13,8 +12,10 @@
   }
   &__button {
     height: 60px;
+    width: 60px;
     margin: 20px;
     border-radius: 50%;
     cursor: pointer;
+    outline: none;
   }
 }

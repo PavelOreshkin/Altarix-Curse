@@ -9,7 +9,7 @@
       "react/prefer-stateless-function": false,
       "react/jsx-filename-extension": 0,
       "max-len": [
-        "error",
+        "warn",
         120
       ]
     },

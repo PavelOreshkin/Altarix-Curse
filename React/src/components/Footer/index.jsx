@@ -7,21 +7,23 @@ class Footer extends React.Component {
   state = {
     id: null,
     message: '',
-    isOutgoing: true
+    isOutgoing: true,
+    user: '',
   }
 
   handleInput = (event) => {
-    const value = event.target.value;
-    if (value !== "\n") this.setState({ message: value });
+    const { value } = event.target;
+    if (value !== '\n') this.setState({ message: value });
   }
 
   sendMessage = () => {
     const { message } = this.state;
+    const { sendMessage } = this.props;
     if (/\w/.test(message)) {
       const timestamp = Date.now();
       this.setState({ id: timestamp }, () => {
-        this.props.sendMessage(this.state);
-        this.setState({message: ''});
+        sendMessage(this.state);
+        this.setState({ message: '' });
       });
     }
   }
@@ -31,27 +33,33 @@ class Footer extends React.Component {
   }
 
   render() {
+    const { message } = this.state;
     return (
       <footer className="Footer">
         <textarea
           className="Footer__textarea"
-          value={this.state.message}
-          onChange={(event) => this.handleInput(event)}
-          onKeyPress={(event) => this.onKeyPress(event)}
+          value={message}
+          onChange={event => this.handleInput(event)}
+          onKeyPress={event => this.onKeyPress(event)}
         />
-        <img
-          src={icon}
-          alt="send-button"
+        <div
           className="Footer__button"
           onClick={this.sendMessage}
-          onKeyPress={(event) => this.onKeyPress(event)}
-        />
+          onKeyPress={event => this.onKeyPress(event)}
+          role="button"
+          tabIndex="0"
+        >
+          <img
+            src={icon}
+            alt="send-button"
+          />
+        </div>
       </footer>
-    )
+    );
   }
 }
 
 Footer.propTypes = {
-  sendMessage: PropTypes.func.isRequired
-}
+  sendMessage: PropTypes.func.isRequired,
+};
 export default Footer;

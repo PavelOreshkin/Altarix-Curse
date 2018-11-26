@@ -5,9 +5,11 @@ import './css/vendors/reset.css';
 import Header from './components/Header';
 import MessageArea from './components/MessageArea';
 import Footer from './components/Footer';
+import Auth from './components/Auth';
 
 class App extends Component {
   state = {
+    userName: '',
     messages: [
       {
         id: 1,
@@ -42,6 +44,12 @@ class App extends Component {
     ],
   }
 
+  auth = userName => this.setState({ userName });
+
+  authOnKeyPress = (event, userName) => {
+    if (event.key === 'Enter') this.auth(userName);
+  }
+
   sendMessage = (newMess) => {
     const { messages } = this.state;
     const newMessArr = [...messages, newMess];
@@ -49,12 +57,19 @@ class App extends Component {
   }
 
   render() {
-    const { messages } = this.state;
+    const { messages, userName } = this.state;
     return (
       <div className="App">
-        <Header userName="Иванов Иван" />
-        <MessageArea messages={messages} />
-        <Footer sendMessage={this.sendMessage} />
+        { (!userName)
+          ? <Auth auth={this.auth} authOnKeyPress={this.authOnKeyPress} />
+          : (
+            <div>
+              <Header userName={userName} />
+              <MessageArea messages={messages} />
+              <Footer sendMessage={this.sendMessage} />
+            </div>
+          )
+        }
       </div>
     );
   }

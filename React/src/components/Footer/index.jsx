@@ -5,10 +5,7 @@ import icon from '../../img/check.svg';
 
 class Footer extends React.Component {
   state = {
-    id: null,
     message: '',
-    isOutgoing: true,
-    user: '',
   }
 
   handleInput = (event) => {
@@ -21,10 +18,13 @@ class Footer extends React.Component {
     const { sendMessage } = this.props;
     if (/\w/.test(message)) {
       const timestamp = Date.now();
-      this.setState({ id: timestamp }, () => {
-        sendMessage(this.state);
-        this.setState({ message: '' });
+      sendMessage({
+        id: timestamp,
+        message,
+        isOutgoing: true,
+        user: '',
       });
+      this.setState({ message: '' });
     }
   }
 
@@ -39,13 +39,13 @@ class Footer extends React.Component {
         <textarea
           className="Footer__textarea"
           value={message}
-          onChange={event => this.handleInput(event)}
-          onKeyPress={event => this.onKeyPress(event)}
+          onChange={this.handleInput}
+          onKeyPress={this.onKeyPress}
         />
         <div
           className="Footer__button"
           onClick={this.sendMessage}
-          onKeyPress={event => this.onKeyPress(event)}
+          onKeyPress={this.onKeyPress}
           role="button"
           tabIndex="0"
         >

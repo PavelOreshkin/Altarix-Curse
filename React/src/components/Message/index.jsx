@@ -11,21 +11,20 @@ class Message extends React.Component {
   }
 
   render() {
-    const { messageObj } = this.props;
+    const { messageObj, userName } = this.props;
     const {
-      message,
-      user,
-      isOutgoing,
+      text,
+      name,
       id,
     } = messageObj;
     return (
-      <article className={(isOutgoing) ? 'Message Message_isOutgoing' : 'Message'} id={id}>
+      <article className={(userName === name) ? 'Message Message_isOutgoing' : 'Message'} id={id}>
         <div className="Message__user MessageUser">
           <img src={icon} alt="user" className="MessageUser__icon" />
-          {(user) ? <p className="MessageUser__name">{user}</p> : ''}
+          <p className="MessageUser__name">{name}</p>
         </div>
         <div className="Message__text">
-          {message}
+          {text}
         </div>
       </article>
     );
@@ -35,10 +34,11 @@ class Message extends React.Component {
 Message.propTypes = {
   messageObj: PropTypes.shape({
     id: PropTypes.number,
-    message: PropTypes.string,
-    user: PropTypes.string,
+    text: PropTypes.string,
+    name: PropTypes.string,
     isOutgoing: PropTypes.bool,
   }).isRequired,
+  userName: PropTypes.string.isRequired,
 };
 
 export default Message;

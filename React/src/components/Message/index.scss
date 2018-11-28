@@ -31,11 +31,15 @@
 }
 
 .MessageUser {
+  display: flex;
+
   &__icon {
     height: 40px;
   }
 
   &__name {
     padding-top: 10px;
+    text-align: center;
+    order: 1;
   }
 }

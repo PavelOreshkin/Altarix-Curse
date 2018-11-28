@@ -15,14 +15,13 @@ class Footer extends React.Component {
 
   sendMessage = () => {
     const { message } = this.state;
-    const { sendMessage } = this.props;
+    const { sendMessage, userName } = this.props;
     if (/\w/.test(message)) {
       const timestamp = Date.now();
       sendMessage({
         id: timestamp,
-        message,
-        isOutgoing: true,
-        user: '',
+        text: message,
+        name: userName,
       });
       this.setState({ message: '' });
     }
@@ -61,5 +60,6 @@ class Footer extends React.Component {
 
 Footer.propTypes = {
   sendMessage: PropTypes.func.isRequired,
+  userName: PropTypes.string.isRequired,
 };
 export default Footer;

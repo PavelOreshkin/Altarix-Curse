@@ -6,54 +6,40 @@ import Header from './components/Header';
 import MessageArea from './components/MessageArea';
 import Footer from './components/Footer';
 import Auth from './components/Auth';
+import db from './firebase';
 
 class App extends Component {
   state = {
     userName: '',
-    messages: [
-      {
-        id: 1,
-        user: 'Пётр Петров',
-        message: 'Привет, как дела?',
-        isOutgoing: false,
-      },
-      {
-        id: 2,
-        user: '',
-        message: 'Всё отлично, у тебя?',
-        isOutgoing: true,
-      },
-      {
-        id: 3,
-        user: 'Пётр Петров',
-        message: 'Я съел собаку',
-        isOutgoing: false,
-      },
-      {
-        id: 4,
-        user: '',
-        message: 'Эмм... я звоню в полицию',
-        isOutgoing: true,
-      },
-      {
-        id: 5,
-        user: 'Пётр Петров',
-        message: 'Пример большого сообщения пример большого сообщения пример большого сообщения пример большого',
-        isOutgoing: false,
-      },
-    ],
+    messages: [],
   }
 
-  auth = userName => this.setState({ userName });
+  componentDidMount() {
+    const messagesRef = db.ref('messages');
+    messagesRef.on('value', (snapshot) => {
+      const messages = snapshot.val();
+      const messageArr = Object.values(messages);
+      this.setState({ messages: messageArr });
+    });
+    this.setState({ userName: localStorage.getItem('user') });
+  }
+
+  auth = (userName) => {
+    localStorage.setItem('user', userName);
+    this.setState({ userName });
+  }
+
+  signOut = () => {
+    localStorage.removeItem('user');
+    this.setState({ userName: '' });
+  }
 
   authOnKeyPress = (event, userName) => {
     if (event.key === 'Enter') this.auth(userName);
   }
 
   sendMessage = (newMess) => {
-    const { messages } = this.state;
-    const newMessArr = [...messages, newMess];
-    this.setState({ messages: newMessArr });
+    db.ref(`/messages/${newMess.id}`).set(newMess);
   }
 
   render() {
@@ -64,9 +50,9 @@ class App extends Component {
           ? <Auth auth={this.auth} authOnKeyPress={this.authOnKeyPress} />
           : (
             <div>
-              <Header userName={userName} />
-              <MessageArea messages={messages} />
-              <Footer sendMessage={this.sendMessage} />
+              <Header userName={userName} signOut={this.signOut} />
+              <MessageArea userName={userName} messages={messages} />
+              <Footer userName={userName} sendMessage={this.sendMessage} />
             </div>
           )
         }

@@ -6,4 +6,12 @@
   padding: 0 0 0 50px;
   border: 1px solid gray;
   font-size: 30px;
+  &__icon {
+    height: 30px;
+    margin-right: 10px;
+    cursor: pointer;
+  }
+  &__button {
+    outline: none;
+  }
 }

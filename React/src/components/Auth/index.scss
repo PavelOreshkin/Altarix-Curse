@@ -10,10 +10,15 @@
   width: 400px;
   font-size: 35px;
   color: #444444;
-  
+
   &__title {
     color: #444444;
   }
+
+  &__form {
+    text-align: center;
+  }
+
   &__input {
     height: 40px;
     width: 300px;
@@ -22,6 +27,7 @@
     border: 1px solid gray;
     text-align: center;
   }
+
   &__button {
     height: 40px;
     width: 100px;

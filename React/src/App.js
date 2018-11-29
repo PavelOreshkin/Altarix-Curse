@@ -24,7 +24,8 @@ class App extends Component {
     this.setState({ userName: localStorage.getItem('user') });
   }
 
-  auth = (userName) => {
+  auth = (event, userName) => {
+    event.preventDefault();
     localStorage.setItem('user', userName);
     this.setState({ userName });
   }
@@ -32,10 +33,6 @@ class App extends Component {
   signOut = () => {
     localStorage.removeItem('user');
     this.setState({ userName: '' });
-  }
-
-  authOnKeyPress = (event, userName) => {
-    if (event.key === 'Enter') this.auth(userName);
   }
 
   sendMessage = (newMess) => {

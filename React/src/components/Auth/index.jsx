@@ -14,23 +14,23 @@ class Auth extends React.Component {
 
   render() {
     const { userName } = this.state;
-    const { auth, authOnKeyPress } = this.props;
+    const { auth } = this.props;
     return (
       <section className="Auth">
         <h1 className="Auth__title">Введите свое имя</h1>
-        <input
-          className="Auth__input"
-          type="text"
-          onKeyPress={event => authOnKeyPress(event, userName)}
-          onChange={this.handleInput}
-          value={userName}
-        />
-        <input
-          className="Auth__button"
-          type="button"
-          onClick={() => auth(userName)}
-          value="Ввести"
-        />
+        <form className="Auth__form" onSubmit={event => auth(event, userName)}>
+          <input
+            className="Auth__input"
+            type="text"
+            onChange={this.handleInput}
+            value={userName}
+          />
+          <input
+            className="Auth__button"
+            type="submit"
+            value="Ввести"
+          />
+        </form>
       </section>
     );
   }

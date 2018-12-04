@@ -4,27 +4,15 @@ import './index.scss';
 import icon from '../../img/check.svg';
 
 class Footer extends React.Component {
-  state = {
-    message: '',
-  }
-
   handleInput = (event) => {
     const { value } = event.target;
-    if (value !== '\n') this.setState({ message: value });
+    const { prepareMessage } = this.props;
+    if (value !== '\n') prepareMessage(value);
   }
 
   sendMessage = () => {
-    const { message } = this.state;
-    const { sendMessage, userName } = this.props;
-    if (/\w/.test(message)) {
-      const timestamp = Date.now();
-      sendMessage({
-        id: timestamp,
-        text: message,
-        name: userName,
-      });
-      this.setState({ message: '' });
-    }
+    const { sendMessage, userName, message } = this.props;
+    sendMessage(message, userName);
   }
 
   onKeyPress = (event) => {
@@ -32,7 +20,7 @@ class Footer extends React.Component {
   }
 
   render() {
-    const { message } = this.state;
+    const { message } = this.props;
     return (
       <footer className="Footer">
         <textarea
@@ -61,5 +49,12 @@ class Footer extends React.Component {
 Footer.propTypes = {
   sendMessage: PropTypes.func.isRequired,
   userName: PropTypes.string.isRequired,
+  prepareMessage: PropTypes.string.isRequired,
+  message: PropTypes.string,
 };
+
+Footer.defaultProps = {
+  message: '',
+};
+
 export default Footer;

@@ -4,21 +4,21 @@ import './index.scss';
 
 class Auth extends React.Component {
   state = {
-    userName: '',
+    user: '',
   }
 
   handleInput = (event) => {
     const { value } = event.target;
-    this.setState({ userName: value });
+    this.setState({ user: value });
   }
 
   render() {
-    const { userName } = this.state;
-    const { auth } = this.props;
+    const { user } = this.state;
+    const { auth, userName } = this.props;
     return (
       <section className="Auth">
         <h1 className="Auth__title">Введите свое имя</h1>
-        <form className="Auth__form" onSubmit={event => auth(event, userName)}>
+        <form className="Auth__form" onSubmit={event => auth(event, user)}>
           <input
             className="Auth__input"
             type="text"
@@ -38,7 +38,7 @@ class Auth extends React.Component {
 
 Auth.propTypes = {
   auth: PropTypes.func.isRequired,
-  authOnKeyPress: PropTypes.func.isRequired,
+  userName: PropTypes.string.isRequired,
 };
 
 export default Auth;

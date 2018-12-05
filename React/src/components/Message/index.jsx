@@ -24,7 +24,7 @@ class Message extends React.Component {
           <p className="MessageUser__name">{name}</p>
         </div>
         <div className="Message__text">
-          {text}
+          {(typeof (text) === 'string') ? text : 'НЕВЕРНЫЙ ФОРМАТ СООБЩЕНИЙ'}
         </div>
       </article>
     );

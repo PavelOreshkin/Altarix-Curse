@@ -9,7 +9,7 @@ import MessageArea from './components/MessageArea';
 import Footer from './components/Footer';
 import Auth from './components/Auth';
 import db from './firebase';
-import { getMessageSuccess, prepareMessage, sendMessage } from './redux/actions/message-actions';
+import { getMessageSuccess, prepareMessage } from './redux/actions/message-actions';
 import { auth, signOut } from './redux/actions/auth-actions';
 
 class App extends Component {
@@ -30,9 +30,9 @@ class App extends Component {
     setAuth(userName);
   }
 
-  // sendMessage = (newMess) => {
-  //   db.ref(`/messages/${newMess.id}`).set(newMess);
-  // }
+  sendMessage = (newMess) => {
+    db.ref(`/messages/${newMess.id}`).set(newMess);
+  }
 
   render() {
     const {
@@ -40,8 +40,7 @@ class App extends Component {
       message,
       userName,
       signOut,
-      prepareMessage,
-      sendMessage,
+      prepareMessage,      
     } = this.props;
     return (
       <div className="App">
@@ -60,7 +59,7 @@ class App extends Component {
               />
               <Footer
                 userName={userName}
-                sendMessage={sendMessage}
+                sendMessage={this.sendMessage}
                 prepareMessage={prepareMessage}
                 message={message}
               />
@@ -77,7 +76,6 @@ App.propTypes = {
   setAuth: PropTypes.func.isRequired,
   signOut: PropTypes.func.isRequired,
   prepareMessage: PropTypes.func.isRequired,
-  sendMessage: PropTypes.func.isRequired,
   userName: PropTypes.string,
   message: PropTypes.string,
   messages: PropTypes.arrayOf(
@@ -108,7 +106,6 @@ const mapDispatchToProps = dispatch => ({
   setAuth: userName => dispatch(auth(userName)),
   signOut: () => dispatch(signOut()),
   prepareMessage: message => dispatch(prepareMessage(message)),
-  sendMessage: (message, userName) => dispatch(sendMessage(message, userName)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

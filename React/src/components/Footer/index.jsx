@@ -11,8 +11,14 @@ class Footer extends React.Component {
   }
 
   sendMessage = () => {
-    const { sendMessage, userName, message } = this.props;
-    sendMessage(message, userName);
+    const { sendMessage, userName, message, prepareMessage } = this.props;
+    const timestamp = Date.now();
+    sendMessage({
+      id: timestamp,
+      text: message,
+      name: userName,
+    });
+    prepareMessage('');
   }
 
   onKeyPress = (event) => {

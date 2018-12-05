@@ -17,21 +17,3 @@ const messageReducer = (state = initialState, action) => {
 };
 
 export default messageReducer;
-
-// sendMessage = (newMess) => {
-//   db.ref(`/messages/${newMess.id}`).set(newMess);
-// }
-
-// sendMessage = () => {
-//   const { message } = this.state;
-//   const { sendMessage, userName } = this.props;
-//   if (/\w/.test(message)) {
-//     const timestamp = Date.now();
-//     sendMessage({
-//       id: timestamp,
-//       text: message,
-//       name: userName,
-//     });
-//     this.setState({ message: '' });
-//   }
-// }

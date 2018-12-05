@@ -7,6 +7,7 @@ import Preloader from '../Preloader';
 const MessageArea = ({ messages, userName }) => (
   <section className="MessageArea">
     <ul>
+      {console.log(messages)}
       {(messages.length !== 0)
         ? messages.map(item => (<li key={item.id}><Message messageObj={item} userName={userName} /></li>))
         : <Preloader />}

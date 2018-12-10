@@ -7,7 +7,7 @@ class Human implements IHuman {
   firstName: string;
   lastName: string;
 
-  constructor(human:IHuman) {
+  constructor(human: IHuman) {
     this.firstName = human.firstName;
     this.lastName = human.lastName;
   }
@@ -18,15 +18,13 @@ class Human implements IHuman {
   public set setName(value: string) {
     this.firstName = value;
   }
-  fullName = ():void => {
+  fullName = (): void => {
     console.log(this.firstName + ' ' + this.lastName)
   }
 }
 
 class Student extends Human implements IHuman {
-  year: number;
-
-  constructor(human: IHuman, year: number) {
+  constructor(human: IHuman, public year: number) {
     super(human)
     this.year = year;
   }
@@ -48,7 +46,7 @@ const palindromeTest = (text: string) => {
   const regExp: RegExp = /[^A-Za-zА-Яа-яё0-9]/g;
   const textForTest: string = text.toLowerCase().replace(regExp, '');
   const length: number = textForTest.length;
-  for (let i:number = 0; i < length / 2; i++) {
+  for (let i: number = 0; i < length / 2; i++) {
     if (textForTest[i] !== textForTest[length - 1 - i]) return false
   }
   return true;

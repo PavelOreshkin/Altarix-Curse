@@ -1,12 +1,13 @@
-interface Human {
+interface IHuman {
   firstName: string,
   lastName: string
 }
 
-class Human {
+class Human implements IHuman {
   firstName: string;
   lastName: string;
-  constructor(human: Human) {
+
+  constructor(human:IHuman) {
     this.firstName = human.firstName;
     this.lastName = human.lastName;
   }
@@ -17,16 +18,16 @@ class Human {
   public set setName(value: string) {
     this.firstName = value;
   }
-  fullName = () => {
+  fullName = ():void => {
     console.log(this.firstName + ' ' + this.lastName)
   }
 }
 
-class Student extends Human {
+class Student extends Human implements IHuman {
   year: number;
 
-  constructor(people: Human, year: number) {
-    super(people)
+  constructor(human: IHuman, year: number) {
+    super(human)
     this.year = year;
   }
 
@@ -38,9 +39,9 @@ class Student extends Human {
 const people = { firstName: 'Finn', lastName: 'Human' }
 const student = new Student(people, 45);
 
-// student.fullName()
-// console.log(student.getName)
-// console.log(student.getYear)
+// student.fullName();
+// console.log(student.getName);
+// console.log(student.getYear);
 
 
 const palindromeTest = (text: string) => {

@@ -39,8 +39,8 @@ var Human = /** @class */ (function () {
 }());
 var Student = /** @class */ (function (_super) {
     __extends(Student, _super);
-    function Student(people, year) {
-        var _this = _super.call(this, people) || this;
+    function Student(human, year) {
+        var _this = _super.call(this, human) || this;
         _this.year = year;
         return _this;
     }
@@ -55,9 +55,9 @@ var Student = /** @class */ (function (_super) {
 }(Human));
 var people = { firstName: 'Finn', lastName: 'Human' };
 var student = new Student(people, 45);
-// student.fullName()
-// console.log(student.getName)
-// console.log(student.getYear)
+// student.fullName();
+// console.log(student.getName);
+// console.log(student.getYear);
 var palindromeTest = function (text) {
     var regExp = /[^A-Za-zА-Яа-яё0-9]/g;
     var textForTest = text.toLowerCase().replace(regExp, '');
